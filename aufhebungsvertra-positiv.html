@@ -1,0 +1,42 @@
+<div style="display: none;">
+
+    Ausgabe Variablen
+    
+    #text(#field(35))
+    
+    #text(#field(36))
+    
+    #text(#field(48))
+    
+    #text(#field(61))
+
+    #text(#field(28))
+    #text(#field(13))
+    #text(#field(13))
+    #text(#field(80))
+
+    </div>
+    
+<label id="wsf-1-label-74" class="wsf-label">Eine erste Einschätzung zu Ihrem Fall</label>
+
+<!-- Fall Aufhebungsvertrag 1 -->
+ #if(#field(13) == "Aufhebungsvertrag" && #field(28) == "0" && #field(80) == "1")
+    <div class="card-alert-win">
+        Es handelt sich um einen <b>Aufhebungsvertrag</b>, der noch <b>nicht unterschrieben</b> wurde. In dieser Situation haben Sie noch die Möglichkeit, den Vertrag zu verhandeln oder möglicherweise abzulehnen. Wir empfehlen Ihnen, alle rechtlichen Aspekte des Aufhebungsvertrages zu prüfen, um sicherzustellen, dass keine nachteiligen Klauseln enthalten sind, die Ihre Rechte beeinträchtigen könnten.
+        <br><br>
+        Wir helfen Ihnen, <b>Ihre Rechte zu wahren</b>. In einem <b>kostenfreien Gespräch mit einem Anwalt</b> klären wir Ihre Fragen und besprechen die <b>nächsten Schritte</b> (bis zu 15 Min.). Klicken Sie auf 'Weiter' oder rufen Sie uns an.
+	</div>
+#endif
+
+<!-- Fall Aufhebungsvertrag 2 --->
+#if(#field(13) == "Aufhebungsvertrag" && #field(80) == "0")
+<div class="card-alert-win">
+    Es soll Ihnen ein <b>Aufhebungsvertrag angeboten werden</b>. Ein <b>Aufhebungsvertrag</b> stellt eine einvernehmliche Beendigung des Arbeitsverhältnisses dar und kann viele Vorteile bieten, wie z.B. eine schnellere Lösung und die Möglichkeit, das Arbeitsverhältnis unter bestimmten Bedingungen zu beenden. Es ist jedoch wichtig, dass Sie sicherstellen, dass der Vertrag keine <b>nachteiligen Bedingungen</b> für Sie enthält, wie etwa eine <b>Sperrzeit beim Arbeitslosengeld</b> oder den <b>Verlust von Ansprüchen auf Abfindung</b>.
+    <br><br>
+    Wir helfen Ihnen, <b>Ihre Rechte zu schützen</b>. In einem <b>kostenfreien Gespräch mit einem Anwalt</b> besprechen wir, wie Sie den Aufhebungsvertrag optimal gestalten und was Sie beachten sollten, um Ihre Ansprüche zu wahren (bis zu 15 Min.). Klicken Sie auf 'Weiter' oder rufen Sie uns an, um Ihre nächsten Schritte zu besprechen.
+</div>
+#endif
+
+<div class="italic" style="font-size:var(--text-s);padding-bottom:var(--space-xs)">
+    Bitte beachten Sie, dass es sich hierbei lediglich um eine erste Einschätzung basiernd auf Ihren Eingaben handelt und keine rechtsverbindliche Beratung darstellt.
+</div>

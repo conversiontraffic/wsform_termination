@@ -1,0 +1,680 @@
+<div style="display: none;">
+
+Ausgabe Variablen
+
+#text(#field(35))
+
+#text(#field(36))
+
+#text(#field(48))
+
+#text(#field(61))
+</div>
+
+<script>
+    // Define texts
+    if (typeof texts === 'undefined') {
+        const texts = {
+         // Kündigungsart und Zeitraum - innerhalb 21 Tage
+    kuendigung_schriftlich_21tage_probezeit: 'Es handelt sich um eine <b>schriftliche Kündigung</b> innerhalb der ersten <b>21 Tage</b> während der Probezeit, wobei die <b>3-Wochen-Frist</b> eingehalten wird.',
+    kuendigung_digital_21tage_probezeit: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> innerhalb der ersten <b>21 Tage</b> während der Probezeit, wobei die <b>3-Wochen-Frist</b> eingehalten wird.',
+    kuendigung_schriftlich_21tage: 'Es handelt sich um eine <b>schriftliche Kündigung</b> außerhalb der Probezeit, wobei die <b>3-Wochen-Frist</b> eingehalten wird.',
+    kuendigung_digital_21tage: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> außerhalb der Probezeit, wobei die <b>3-Wochen-Frist</b> eingehalten wird.',
+
+    // Kündigungsart und Zeitraum - 21-28 Tage
+    kuendigung_schriftlich_21_28_probezeit: 'Es handelt sich um eine <b>schriftliche Kündigung</b> innerhalb der ersten <b>21-28 Tage</b> nach Kündigungserhalt während der <b>Probezeit</b>, wobei die <b>3-Wochen-Frist</b> laut Ihren Angaben <b>nicht eingehalten</b> wird.',
+    kuendigung_digital_21_28_probezeit: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> innerhalb der ersten <b>21-28 Tage</b> nach Kündigungserhalt während der <b>Probezeit</b>, wobei die <b>3-Wochen-Frist</b> laut Ihren Angaben <b>nicht eingehalten</b> wird.',
+    kuendigung_schriftlich_21_28tage: 'Es handelt sich um eine <b>schriftliche Kündigung</b> innerhalb der ersten <b>21-28 Tage</b> nach Kündigungserhalt, wobei die <b>3-Wochen-Frist</b> laut Ihren Angaben <b>nicht eingehalten</b> wird.',
+    kuendigung_digital_21_28tage: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> innerhalb der ersten <b>21-28 Tage</b> nach Kündigungserhalt, wobei die <b>3-Wochen-Frist</b> laut Ihren Angaben <b>nicht eingehalten</b> wird.',
+
+    // Kündigungsart und Zeitraum - außerhalb Probezeit
+   
+    kuendigung_digital_28tage: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> nach mehr als <b>28 Tagen</b> außerhalb der Probezeit, wobei die <b>3-Wochen-Frist laut Ihren Angaben nicht eingehalten</b> wird.',
+    kuendigung_digital_28tage_probezeit: 'Es handelt sich um eine <b>digitale oder mündliche Kündigung</b> nach mehr als <b>28 Tagen</b> innerhalb der Probezeit, wobei die <b>3-Wochen-Frist laut Ihren Angaben nicht eingehalten</b> wird.',
+
+    // Umstände
+    keine_umstaende: 'Es liegen <b>keine besonderen Umstände</b> vor.',
+    besondere_umstaende: 'Aufgrund der <b>besonderen Umstände</b> für Ihre Situation gilt ein <b>Sonderkündigungsschutz</b>.',
+
+    // Chancen - Hoch
+    chancen_hoch: 'Die <b>Chancen</b>, gegen die Kündigung vorzugehen, bzw. eine Abfindung zu erhalten, sind <b>hoch</b>.',
+    chancen_hoch_digital: 'Die <b>Chancen</b>, gegen die Kündigung vorzugehen, bzw. eine Abfindung zu erhalten, sind <b>hoch</b>, da die Kündigung aufgrund ihrer <b>digitalen oder mündlichen Form</b> möglicherweise <b>unwirksam</b> ist.',
+
+    // Chancen - Mittel/Gering
+    chancen_mittel: 'Die <b>Chancen</b>, gegen die Kündigung vorzugehen sind <b>mittel</b>. In der Regel kann in Ihrem Fall oft noch eine <b>geringe Abfindung</b> und eine <b>gutes Zeugnis</b> verhandelt werden.',
+    chancen_gering_frist: 'Die <b>Chancen</b>, gegen die Kündigung vorzugehen, bzw. eine Abfindung zu erhalten, sind allerdings <b>gering</b>, es sei denn, die <b>3-Wochen-Frist</b> wird überprüft und stellt sich als nicht korrekt heraus.',
+    chancen_mittel_probezeit: 'Die <b>Chancen</b>, gegen die Kündigung vorzugehen sind <b>mittel</b>. In der Regel kann in Ihrem Fall oft noch eine <b>geringe Abfindung</b> und ein <b>gutes Zeugnis</b> verhandelt werden.',
+
+    // Standard Closing
+    standard_closing: 'Lassen Sie uns gemeinsam <b>Ihre Rechte durchsetzen</b>. In einem <b>kostenfreien 15-minütigen Erstgespräch</b> analysiert einer unserer erfahrener Anwälte Ihren Fall und entwickelt mit Ihnen die optimale Strategie.</p><p><b>Sichern Sie sich jetzt Ihre Ansprüche</b> und klicken Sie auf \'Weiter\' oder rufen Sie uns direkt an.',
+
+    // Neue Konstante für Minijob-Status
+    minijob_status: 'Da es sich um einen <b>Minijob</b> handelt, gelten besondere arbeitsrechtliche Bestimmungen.'
+};
+        window.texts = texts;
+    }
+
+    // Define function to insert all texts
+    function insertTexts() {
+        const elements = {
+          // Kündigungsart und Zeitraum - innerhalb 21 Tage
+        'kuendigung_schriftlich_21tage_probezeit': 'kuendigung_schriftlich_21tage_probezeit',
+        'kuendigung_digital_21tage_probezeit': 'kuendigung_digital_21tage_probezeit',
+        'kuendigung_schriftlich_21tage': 'kuendigung_schriftlich_21tage',
+        'kuendigung_digital_21tage': 'kuendigung_digital_21tage',
+        
+        // Kündigungsart und Zeitraum - 21-28 Tage
+        'kuendigung_schriftlich_21_28_probezeit': 'kuendigung_schriftlich_21_28_probezeit',
+        'kuendigung_digital_21_28_probezeit': 'kuendigung_digital_21_28_probezeit',
+        'kuendigung_schriftlich_21_28tage': 'kuendigung_schriftlich_21_28tage',
+        'kuendigung_digital_21_28tage': 'kuendigung_digital_21_28tage',
+        
+        // Kündigungsart und Zeitraum - 28 Tage
+        'kuendigung_digital_28tage': 'kuendigung_digital_28tage',
+        'kuendigung_digital_28tage_probezeit': 'kuendigung_digital_28tage_probezeit',
+
+        // Umstände
+        'keine_umstaende': 'keine_umstaende',
+        'besondere_umstaende': 'besondere_umstaende',
+        
+        // Chancen
+        'chancen_hoch': 'chancen_hoch',
+        'chancen_hoch_digital': 'chancen_hoch_digital',
+        'chancen_mittel': 'chancen_mittel',
+        'chancen_gering_frist': 'chancen_gering_frist',
+        'chancen_mittel_probezeit': 'chancen_mittel_probezeit',
+        
+        // Standard Closing
+        'standard_closing': 'standard_closing',
+
+        // Minijob Status
+        'minijob_status': 'minijob_status'
+        };
+
+        // Only set innerHTML for elements that exist
+        for (const [elementId, textKey] of Object.entries(elements)) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = texts[textKey];
+            }
+        }
+    }
+</script>
+
+<label id="wsf-1-label-74" class="wsf-label">Eine erste Einschätzung zu Ihrem Fall</label>
+
+
+    <!--- Fall2 -->
+    <!-- Probezeit, 21 Tage, Rechtsschutz, schriftlich, keine besonderen Umstände -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21tage_probezeit"></span> 
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+    <!-- Fall 3 -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21tage_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_mittel_probezeit"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+    </div>
+    <script>insertTexts();</script>
+    #endif
+    <!--- Fall 4 -->
+    <!-- Mündliche oder digitale Kündigung -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+    </div>
+    <script>insertTexts();</script>
+    #endif
+    <!--- Fall 5 -->
+    <!-- Mündliche oder digitale Kündigung -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 6 -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "0" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21tage_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+    <!-- Fall 8 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+    <!-- Fall 9 -->
+    #if(#field(21) <= 21 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+      <!-- Fall 10 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+    
+    <!-- Fall 11 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 12 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 13 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 14 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "0" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 15 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "0" && #field(61) == "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_schriftlich_21"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 16 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 17 -->
+    #if(#field(21) <= 21 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- -------- 21-28 Tage -------- -->
+     <!-- Fall 18 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+    
+    <!-- Fall 19 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 20 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 21 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 22 -->
+    <!--- Probezeit, 21-28 Tage, Kein Rechtsschutz, schriftlich, besondere Umstände -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "0" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 24 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 25 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 26 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 27 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+    <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 28 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 29 -->
+    #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+     <!-- Fall 30 -->
+     #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "0" && #field(61) == "0" && #field(48) != "0")
+     <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+     </div>
+     #endif
+     
+     <!-- Fall 31 -->
+     #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "0" && #field(61) == "0" && #field(48) == "0")
+     <div class="card-alert-mid">
+        <span id="kuendigung_schriftlich_21_28tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_gering_frist"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+     </div>
+     #endif
+ 
+     <!-- Fall 32 -->
+     #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+     <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+     </div>
+     #endif
+ 
+     <!-- Fall 33 -->
+     #if(#field(21) > 21 && #field(21) <= 28 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+     <div class="card-alert-win">
+        <span id="kuendigung_digital_21_28tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+     </div>
+     #endif
+    <!-- -------- über 28 Tage -------- -->
+    <!-- Fall 36 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) > 28 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 37 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) > 28 && #field(35) == "1" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 40 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) > 28 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage_probezeit"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 41 -->
+    <!--- Mündliche oder digitale Kündigung -->
+    #if(#field(21) > 28 && #field(35) == "1" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage_probezeit"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 44 -->
+    #if(#field(21) > 28 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 45 -->
+    #if(#field(21) > 28 && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage"></span>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 48 -->
+    #if(#field(21) > 28 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) != "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage"></span>
+        <span id="besondere_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+    <!-- Fall 49 -->
+    #if(#field(21) > 28 && #field(35) == "0" && #field(36) == "0" && #field(61) != "0" && #field(48) == "0")
+    <div class="card-alert-win">
+        <span id="kuendigung_digital_28tage"></span>
+        <br><br>
+        <span id="keine_umstaende"></span>
+        <span id="chancen_hoch_digital"></span>
+        <br><br>
+        <span id="standard_closing"></span>
+        <script>insertTexts();</script>
+    </div>
+    #endif
+
+
+    <!-- -------- Minijob bis 21 Tage - Schriftliche Kündigung ohne Probezeit-------->
+<!-- Fall - Minijob, bis 21 Tage, schriftlich, mit Rechtsschutz, mit Umständen -->
+<!--#if(#field(21) <= 21 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+<div class="card-alert-win">
+    <span id="kuendigung_schriftlich_21tage"></span>
+    <span id="besondere_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_hoch"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- Fall - Minijob, bis 21 Tage, schriftlich, mit Rechtsschutz, ohne Umstände -->
+<!--#if(#field(21) <= 21 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+<div class="card-alert-mid">
+    <span id="kuendigung_schriftlich_21tage"></span>
+    <span id="keine_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_mittel"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- -------- Minijob bis 21 Tage - Digitale/Mündliche Kündigung -------- -->
+<!-- Fall - Minijob, bis 21 Tage, digital, mit Rechtsschutz, mit Umständen -->
+<!--#if(#field(21) <= 21 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+<div class="card-alert-win">
+    <span id="kuendigung_digital_21tage"></span>
+    <span id="besondere_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_hoch_digital"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- Fall - Minijob, bis 21 Tage, digital, mit Rechtsschutz, ohne Umstände -->
+<!--#if(#field(21) <= 21 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+<div class="card-alert-win">
+    <span id="kuendigung_digital_21tage"></span>
+    <span id="keine_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_hoch_digital"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- -------- Minijob 21-28 Tage - Schriftliche Kündigung -------- -->
+<!-- Fall - Minijob, 21-28 Tage, schriftlich, mit Rechtsschutz, mit Umständen -->
+<!--#if(#field(21) > 21 && #field(21) <= 28 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) != "0")
+<div class="card-alert-mid">
+    <span id="kuendigung_schriftlich_21_28"></span>
+    <span id="besondere_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_gering_frist"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- Fall - Minijob, 21-28 Tage, schriftlich, mit Rechtsschutz, ohne Umstände -->
+<!--#if(#field(21) > 21 && #field(21) <= 28 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) == "0" && #field(48) == "0")
+<div class="card-alert-mid">
+    <span id="kuendigung_schriftlich_21_28"></span>
+    <span id="keine_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_gering_frist"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- -------- Minijob 21-28 Tage - Digitale/Mündliche Kündigung -------- -->
+<!-- Fall - Minijob, 21-28 Tage, digital, mit Rechtsschutz, mit Umständen -->
+<!--#if(#field(21) > 21 && #field(21) <= 28 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) != "0")
+<div class="card-alert-win">
+    <span id="kuendigung_digital_21_28"></span>
+    <span id="besondere_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_hoch_digital"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+
+<!-- Fall - Minijob, 21-28 Tage, digital, mit Rechtsschutz, ohne Umstände -->
+<!--#if(#field(21) > 21 && #field(21) <= 28 && #field(86) == "1" && #field(35) == "0" && #field(36) == "1" && #field(61) != "0" && #field(48) == "0")
+<div class="card-alert-win">
+    <span id="kuendigung_digital_21_28"></span>
+    <span id="keine_umstaende"></span>
+    <span id="minijob_status"></span>
+    <span id="chancen_hoch_digital"></span>
+    <br><br>
+    <span id="standard_closing"></span>
+    <script>insertTexts();</script>
+</div>
+#endif-->
+ 
+
+<div class="italic" style="font-size:var(--text-s);padding-bottom:var(--space-xs)">Bitte beachten Sie, dass es sich hierbei lediglich um eine erste Einschätzung basiernd auf Ihren Eingaben handelt und keine rechtsverbindliche Beratung darstellt.</div>
